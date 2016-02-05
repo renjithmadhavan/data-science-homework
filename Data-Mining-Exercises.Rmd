@@ -1,0 +1,115 @@
+---
+title: "Data Mining Exercises"
+author: "Keith Hultman"
+date: "February 1, 2016"
+output: word_document
+---
+
+Week 1: 2.4, 2.6, 2.8, 3.3, 3.6
+
+2.4 a. 
+
+```{r, echo=FALSE}
+age <- c(23, 23, 27, 27, 39, 41, 47, 49, 50, 52, 54, 54, 56, 57, 58, 58, 60, 61)
+percentfat <- c(9.5, 26.5, 7.8, 17.8, 31.4, 25.9, 27.4, 27.2, 31.2, 34.6, 42.5, 28.8, 33.4, 30.2, 34.1, 32.9, 41.2, 35.7)
+```
+
+```{r}
+mean(age)
+median(age)
+sd(age)
+
+mean(percentfat)
+median(percentfat)
+sd(percentfat)
+
+
+```
+
+2.4 b.
+
+```{r}
+patients <- data.frame(age, percentfat)
+boxplot(x=as.list(patients), data=patients)
+```
+
+2.4 c. 
+```{r}
+library(ggplot2)
+ggplot(patients, aes(age, percentfat)) + geom_point()
+
+?qqplot
+qqplot(patients$age, patients$percentfat, plot.it = TRUE, xlab = "Age", ylab = "Percent Fat")
+```
+
+2.6 Given two objects represented by the tuples (22, 1, 42, 10) and (20, 0, 36, 8):
+(a) Compute the Euclidean distance between the two objects.
+(b) Compute the Manhattan distance between the two objects.
+(c) Compute the Minkowski distance between the two objects, using h = 3. 
+(d) Compute the supremum distance between the two objects.
+
+```{r}
+a = sqrt((22-20)^2+(1-0)^2+(42-36)^2+(10-8)^2)
+a
+
+b = (22-20)+(1-0)+(42-36)+(10-8)
+b
+
+c = ((22-20)^3+(1-0)^3+(42-36)^3+(10-8)^3)^(1/3)
+c
+
+d = 42-36
+d
+```
+
+
+2.8
+
+```{r}
+
+x = c(1.5, 2, 1.6, 1.2, 1.5)
+y = c(1.7, 1.9, 1.8, 1.5, 1.0)
+plot(x,y, xlim=c(1,2), ylim=c(1,2))
+points(x=1.4, y=1.6, col="red")
+
+```
+Just by appearance the closest looks to be x1
+
+Euclidean
+```{r}
+x[6] <- 1.4
+y[6] <- 1.6
+dist(as.matrix(x,y), method = "euclidean")
+
+```
+according to this, both x1 and x5 are 0.1 from new point. This doesn't look right. 
+
+Manhattan
+```{r}
+dist(as.matrix(x,y), method = "manhattan", p=1)
+```
+
+Again, both x1 and x5 are closest, and matrix is identical?
+
+Supremum by rank
+
+x1 = 0.1
+x3 = 0.2
+x4 = 0.2
+x2 = 0.6
+x5 = 0.6
+
+x1 is closest. 
+
+Cosine similarity:
+
+
+
+```{r}
+
+```
+Note that because the cosine similarity measure does not obey all of the properties of Section 2.4.4 defining metric measures, it is referred to as a nonmetric measure.
+Question: which properties does it not obey?
+
+
+
